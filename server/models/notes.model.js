@@ -1,14 +1,17 @@
 const mongoose = require("mongoose");
 
-const noteSchema = new mongoose.Schema({
-    title:String,
-    tagline:String,
-    body:String,
-    isPinned:Boolean,
-    image:String,
-    background_color:String
-},{timestamps:true});
+const noteSchema = new mongoose.Schema(
+  {
+    title: { type: String, required: true },
+    tagline: { type: String, required: true },
+    body: { type: String, required: true },
+    isPinned: { type: Boolean, default: false },
+    image: { type: String, default: "" },
+    background_color: { type: String, default: "" },
+  },
+  { timestamps: true }
+);
 
-const Note = mongoose.model("note",noteSchema);
+const Note = mongoose.model("note", noteSchema);
 
-module.exports = Note; 
+module.exports = Note;

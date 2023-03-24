@@ -1,11 +1,15 @@
 const express = require("express");
 const connection = require("./config/database");
 require("dotenv").config();
+const cors = require("cors");
+const noteRoutes = require("./routes/notes.routes");
 
 const application = express();
 const { PORT } = process.env || 8000;
 
 application.use(express.json());
+application.use(cors());
+application.use("/notes",noteRoutes);
 
 
 application.get("/",(req,res)=>{
