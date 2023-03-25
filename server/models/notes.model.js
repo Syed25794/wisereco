@@ -9,7 +9,7 @@ const noteSchema = new mongoose.Schema(
     image: { type: String, default: "" },
     background_color: { type: String, default: "" },
   },
-  { timestamps: true }
+  { timestamps: true, versionKey:false }
 );
 
 const Note = mongoose.model("note", noteSchema);
