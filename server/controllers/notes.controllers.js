@@ -8,41 +8,19 @@ const getNotes = async ( req, res )=>{
             res.status(400).send({"message":"page query is not found!"});
         }
         const limit = 6 ;
-        const skips = ( Number(page)- 1 ) * limit ; 
-        let remainingNotes=0;
+        const startIndex = ( Number(page)- 1 ) * limit ; 
+        const endIndex = page * limit ;
 
-        const pinnedNotes = await Note.find({ isPinned: true }).sort({ updatedAt: -1 }).skip(skips).limit(limit);
-        remainingNotes=limit-pinnedNotes.length;
-        console.log(remainingNotes,pinnedNotes.length,skips);
-        if( pinnedNotes.length === 0 ){
-            const unpinnedNotes = await Note.find().sort({updatedAt:-1}).skip(skips).limit(limit);
-            return res.status(200).send({pinnedNotes,unpinnedNotes});
-        }
-        
-        if( remainingNotes > 0 ){
-            console.log("high");
-            const unpinnedNotes = await Note.find({isPinned:false}).sort({updatedAt:-1}).limit(remainingNotes);
-            res.status(200).send({unpinnedNotes,pinnedNotes});
-        }else{
-            console.log("low");
-            res.status(200).send({unpinnedNotes:[],pinnedNotes});
-        }
+        const pinnedNotes = await Note.find({ isPinned: true }).sort({ updatedAt: -1 });
+        const unpinnedNotes = await Note.find({isPinned:false}).sort({updatedAt:-1});
+
+        const combinedNotes = [...pinnedNotes,...unpinnedNotes];
+        const result = combinedNotes.slice(startIndex,endIndex);
+        res.status(200).send({result});
     } catch (error) {
         res.status(500).send({error:error.message});
     }
 }
-
-
-
-//     const pinnedCount = await Note.countDocuments({ isPinned: true });
-//     const nonPinnedSize = size - pinnedCount;
-//     const nonPinnedNotes = await Note.find({ isPinned: false })
-//       .sort({ updatedAt: -1 })
-//       .skip((page - 1) * nonPinnedSize)
-//       .limit(nonPinnedSize);
-//     const total = pinnedCount + await Note.countDocuments({ isPinned: false });
-//     const notes = [...pinnedNotes, ...nonPinnedNotes];
-//     res.status(200).json({ notes, total });
 
 const createNote = async ( req, res )=>{
     const { title, tagline, body, isPinned, background_color, image } = req.body;
