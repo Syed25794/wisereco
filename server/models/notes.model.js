@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+
+//Creating notes schema 
 const noteSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
@@ -12,6 +14,8 @@ const noteSchema = new mongoose.Schema(
   { timestamps: true, versionKey:false }
 );
 
+
+//Creating note model
 const Note = mongoose.model("note", noteSchema);
 
 module.exports = Note;
