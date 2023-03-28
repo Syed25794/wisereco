@@ -1,9 +1,11 @@
+import { Box } from "@chakra-ui/react";
+import Home from "./page/Home";
 
 function App() {
   return (
-    <div>
-      
-    </div>
+    <Box>
+      <Home />
+    </Box>
   );
 }
 
