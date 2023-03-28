@@ -8,6 +8,7 @@ const Home = () => {
   const [data,setData]=useState([]);
   const [page,setPage]=useState(1);
   const [isClicked,setIsClicked]=useState(false);
+  const [formData,setFormData]=useState({ title:"", tagline:"", body:"", image:"", background_color:"", isPinned:false});
 
 
 
@@ -21,14 +22,19 @@ const Home = () => {
       setData(result.result);
     }
     loadNotes();
-  },[page])
+  },[page]);
+
+  const hideInputs=(e)=>{
+    setIsClicked(false);
+    setFormData({...formData,title:"", tagline:"", body:"", image:"", background_color:"", isPinned:false})
+  }
 
 
   return (
-    <Box onClick={()=>setIsClicked(false)}>
+    <Box onClick={hideInputs}>
         <Button colorScheme="blue" variant="ghost" onClick={()=>setPage(page+1)} disabled={ data.length < 6 }>Next</Button>
         <Button colorScheme="blue" variant="ghost" onClick={()=>setPage(page-1)} disabled={ page === 1}>Previous</Button>
-        <InputBox isClicked={isClicked} setIsClicked={setIsClicked} />
+        <InputBox isClicked={isClicked} setIsClicked={setIsClicked} formData={formData} setFormData={setFormData} />
         <Note />
         <NotePopUp />
     </Box>
