@@ -45,6 +45,12 @@
             "url": "https://www.gstatic.com/keep/backgrounds/celebration_light_thumb_0715.svg",
             "description":"Celebration Light Thumb"
         }
+        ,
+        {
+            "id":10,
+            "url": "",
+            "description":"Blank Image"
+        }
     ],
     "colors": [
         {
@@ -91,6 +97,10 @@
         {
             "id": 11,
             "color": "#e8eaed"
+        },
+        {
+            "id": 12,
+            "color": "white"
         }
     ]
 }

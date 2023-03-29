@@ -3,7 +3,7 @@ import Home from "./page/Home";
 
 function App() {
   return (
-    <Box>
+    <Box position="relative">
       <Home />
     </Box>
   );

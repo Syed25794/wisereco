@@ -9,8 +9,7 @@ const Home = () => {
   const [page,setPage]=useState(1);
   const [isClicked,setIsClicked]=useState(false);
   const [formData,setFormData]=useState({ title:"", tagline:"", body:"", image:"", background_color:"", isPinned:false});
-
-
+  const [showColorImage,setShowColorImage]=useState(false);
 
   useEffect(()=>{
     async function loadNotes(){
@@ -26,7 +25,8 @@ const Home = () => {
 
   const hideInputs=(e)=>{
     setIsClicked(false);
-    setFormData({...formData,title:"", tagline:"", body:"", image:"", background_color:"", isPinned:false})
+    setShowColorImage(false);
+    setFormData({...formData,title:"", tagline:"", body:"", image:"", background_color:"", isPinned:false});
   }
 
 
@@ -34,7 +34,7 @@ const Home = () => {
     <Box onClick={hideInputs}>
         <Button colorScheme="blue" variant="ghost" onClick={()=>setPage(page+1)} disabled={ data.length < 6 }>Next</Button>
         <Button colorScheme="blue" variant="ghost" onClick={()=>setPage(page-1)} disabled={ page === 1}>Previous</Button>
-        <InputBox isClicked={isClicked} setIsClicked={setIsClicked} formData={formData} setFormData={setFormData} />
+        <InputBox isClicked={isClicked} setIsClicked={setIsClicked} formData={formData} setFormData={setFormData} showColorImage={showColorImage} setShowColorImage={setShowColorImage} />
         <Note />
         <NotePopUp />
     </Box>
