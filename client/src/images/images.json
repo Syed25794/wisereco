@@ -1,0 +1,96 @@
+{
+    "images": [
+        {
+            "id":1,
+            "url": "https://www.gstatic.com/keep/backgrounds/grocery_light_thumb_0615.svg",
+            "description":"Grocery Light Thumb"
+        },
+        {
+            "id":2,
+            "url": "https://www.gstatic.com/keep/backgrounds/food_light_thumb_0615.svg",
+            "description":"Food Light Thumb"
+        },
+        {
+            "id":3,
+            "url": "https://www.gstatic.com/keep/backgrounds/music_light_thumb_0615.svg",
+            "description":"Music Light Thumb"
+        },
+        {
+            "id":4,
+            "url": "https://www.gstatic.com/keep/backgrounds/recipe_light_thumb_0615.svg",
+            "description":"Recipe Light Thumb"
+        },
+        {
+            "id":5,
+            "url": "https://www.gstatic.com/keep/backgrounds/notes_light_thumb_0615.svg",
+            "description":"Notes Light Thumb"
+        },
+        {
+            "id":6,
+            "url": "https://www.gstatic.com/keep/backgrounds/places_light_thumb_0615.svg",
+            "description":"Places Light Thumb"
+        },
+        {
+            "id":7,
+            "url": "https://www.gstatic.com/keep/backgrounds/travel_light_thumb_0615.svg",
+            "description":"Travel Light Thumb"
+        },
+        {
+            "id":8,
+            "url": "https://www.gstatic.com/keep/backgrounds/video_light_thumb_0615.svg",
+            "description":"Video Light Thumb"
+        },
+        {
+            "id":9,
+            "url": "https://www.gstatic.com/keep/backgrounds/celebration_light_thumb_0715.svg",
+            "description":"Celebration Light Thumb"
+        }
+    ],
+    "colors": [
+        {
+            "id": 1,
+            "color": "#f28b82"
+        },
+        {
+            "id": 2,
+            "color": "#fbbc04"
+        },
+        {
+            "id": 3,
+            "color": "#fff475"
+        },
+        {
+            "id": 4,
+            "color": "#ccff90"
+        },
+        {
+            "id": 5,
+            "color": "#a7ffeb"
+        },
+        {
+            "id": 6,
+            "color": "#cbf0f8"
+        },
+        {
+            "id": 7,
+            "color": "#aecbfa"
+        },
+        {
+            "id": 8,
+            "color": "#d7aefb"
+        }
+        ,
+        {
+            "id": 9,
+            "color": "#fdcfe8"
+        },
+        {
+            "id": 10,
+            "color": "#e6c9a8"
+        },
+        {
+            "id": 11,
+            "color": "#e8eaed"
+        }
+    ]
+}

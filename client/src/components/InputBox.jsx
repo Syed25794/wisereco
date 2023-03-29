@@ -1,22 +1,38 @@
 import { Box, Button, Image, Input } from "@chakra-ui/react";
-import { useState } from "react";
+// import { useState } from "react";
+
+
 
 const InputBox = ({isClicked,setIsClicked,formData,setFormData}) => {
-  const [showColorImage,setShowColorImage]=useState(false);
-  console.log(formData);
+  // const [showColorImage,setShowColorImage]=useState(false);
+  console.log(formData,process.env.CLOUD_NAME);
 
   const handleFormData=(e)=>{
     e.stopPropagation();
     setIsClicked(true);
     const { name, value } = e.target;
     if( name === "image" ){
-      console.log(e.target.files[0].name);
+      const file = e.target.files[0];
+      TransformFile(file);
     }
     if( name === "isPinned" ){
       setFormData({...formData,isPinned:!formData.isPinned });
     }else{
       setFormData({...formData,[name]:value});
     }
+  }
+
+  const TransformFile=(file)=>{
+    const reader = new FileReader();
+      if( file ){
+        reader.readAsDataURL(file);
+        reader.onloadend=()=>{
+          console.log(reader.result);
+          setFormData({...formData,image:reader.result});
+        };
+      }else {
+        setFormData({...formData,image:""});
+      }
   }
 
   const showInputs = (e)=>{
@@ -27,7 +43,10 @@ const InputBox = ({isClicked,setIsClicked,formData,setFormData}) => {
   
 
   return (
-    <Box onClick={showInputs} width="680px" margin="auto" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" borderRadius="9px" >
+    <Box onClick={showInputs} width="680px" margin="auto" boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px" borderRadius="9px" >
+      <Box>
+        {formData.image !== "" ? <Image height="300px" borderRadius="9px 9px 0px 0px" width="full" src={formData.image} alt="Image Preview" /> : null }
+      </Box>
       <Box display="flex" gap="15px" padding="2px 3px" >
         <Box width="595px" wordBreak="break-all" >
           {isClicked ? <Input  focusBorderColor="white" border="none" onChange={handleFormData} type="text" name="title" value={formData.title} placeholder="Enter Title of the note" required/> : null }
