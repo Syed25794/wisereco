@@ -1,14 +1,19 @@
 import { Box, Button } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import InputBox from '../components/InputBox'
 import Note from '../components/Note'
 import NotePopUp from '../components/NotePopUp'
+import { ISCLICKED_FALSE, RESET_FORM_DATA, SHOW_COLOR_IMAGE_FALSE } from '../context/actionType'
+import { NotesContext } from '../context/NoteContext'
 
 const Home = () => {
+  const [state,dispatch]=useContext(NotesContext);
+  // const { page, formData,showColorImage} = state;
+  // const { isClicked } = state ;
+  console.log(state);
   const [data,setData]=useState([]);
   const [page,setPage]=useState(1);
-  const [isClicked,setIsClicked]=useState(false);
-  const [formData,setFormData]=useState({ title:"", tagline:"", body:"", image:"", background_color:"", isPinned:false});
+  const [formData,setFormData]=useState({ title:"", tagline:"", text:"", image:"", background_color:"", isPinned:false});
   const [showColorImage,setShowColorImage]=useState(false);
 
   useEffect(()=>{
@@ -24,9 +29,9 @@ const Home = () => {
   },[page]);
 
   const hideInputs=(e)=>{
-    setIsClicked(false);
-    setShowColorImage(false);
-    setFormData({...formData,title:"", tagline:"", body:"", image:"", background_color:"", isPinned:false});
+    dispatch({type:ISCLICKED_FALSE});
+    dispatch({type:SHOW_COLOR_IMAGE_FALSE});
+    dispatch({type:RESET_FORM_DATA});
   }
 
 
@@ -34,7 +39,7 @@ const Home = () => {
     <Box onClick={hideInputs}>
         <Button colorScheme="blue" variant="ghost" onClick={()=>setPage(page+1)} disabled={ data.length < 6 }>Next</Button>
         <Button colorScheme="blue" variant="ghost" onClick={()=>setPage(page-1)} disabled={ page === 1}>Previous</Button>
-        <InputBox isClicked={isClicked} setIsClicked={setIsClicked} formData={formData} setFormData={setFormData} showColorImage={showColorImage} setShowColorImage={setShowColorImage} />
+        <InputBox formData={formData} setFormData={setFormData} showColorImage={showColorImage} setShowColorImage={setShowColorImage} />
         <Note />
         <NotePopUp />
     </Box>

@@ -2,5 +2,13 @@
     margin:0;
     padding:0;
     box-sizing: border-box;
+    border-color: transparent;
+    word-wrap: break-word;
+    overflow-wrap:break-word;
     font-family: "Poppins",sans-serif,'Times New Roman', Times, serif;
+}
+
+input {
+    word-wrap: break-word;
+    overflow-wrap:break-word;
 }
