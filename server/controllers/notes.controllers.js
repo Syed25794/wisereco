@@ -1,4 +1,5 @@
 const Note = require("../models/notes.model");
+const cloudinary = require("./../utils/cloudinary");
 
 const getNotes = async ( req, res )=>{
     try {
@@ -31,21 +32,31 @@ const getNotes = async ( req, res )=>{
 const createNote = async ( req, res )=>{
 
     //Parsing the data from request object
-    const { title, tagline, body, isPinned, background_color, image } = req.body;
+    const { title, tagline, text, isPinned, background_color, image } = req.body;
     try {
 
+        let newImage = image ; 
+        if( image ){
+            const imageResponse = await cloudinary.uploader.upload(image,{
+                upload_preset:"wiser_eco"
+            });
+            if( imageResponse ){
+                newImage=imageResponse
+            }
+        }
+        
         //Creating an instance of note schema
         const newNote = new Note({
             title,
             tagline,
-            body,
+            text,
             isPinned,
             background_color,
-            image
+            image:newImage
         });
 
         //Inserting note and sending response
-        const createdNote = await Note.insertMany([newNote],{returnDocument:"after"});
+        const createdNote = await newNote.save();
         res.status(201).send({createdNote});
     } catch (error) {
         //handling the error
@@ -57,7 +68,7 @@ const updateNote = async (req, res) => {
     try {
         //Getting id from params and parsing the data from request object
       const { id } = req.params;
-      const { title, tagline, body, isPinned, background_color, image } = req.body;
+      const { title, tagline, text, isPinned, background_color, image } = req.body;
 
       //handling the error if id is not found!
       if (!id) {
@@ -66,7 +77,7 @@ const updateNote = async (req, res) => {
       }
   
       //updating the notes data and responding the same.
-      const updatedNote = await Note.findOneAndUpdate({ _id: id }, { title, tagline, body, isPinned, background_color, image }, { new: true });
+      const updatedNote = await Note.findOneAndUpdate({ _id: id }, { title, tagline, text, isPinned, background_color, image }, { new: true });
       res.status(200).send({ updatedNote });
     } catch (error) {
         //handling the error

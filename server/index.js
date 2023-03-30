@@ -8,10 +8,10 @@ const application = express();
 const { PORT } = process.env || 8000;
 
 //Using express middleware , cors and defining routes
-application.use(express.json());
+application.use(express.json( { limit : '10000kb' , extended : true }));
+application.use(express.urlencoded({ limit : '10000kb' , extended : true , parameterLimit : 50000}))
 application.use(cors());
 application.use("/notes",noteRoutes);
-
 
 //Home page routes message
 application.get("/",(req,res)=>{
