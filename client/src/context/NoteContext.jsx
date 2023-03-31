@@ -1,4 +1,5 @@
-import { createContext , useReducer } from 'react';
+import { createContext , useCallback, useReducer } from 'react';
+import { GET_NOTE_ERROR, GET_NOTE_LOADING, GET_NOTE_SUCCESS } from './actionType';
 import { Reducer } from './Reducer';
 
 const initState={
@@ -40,19 +41,20 @@ export default function NotesContextProviderWrapper({children}){
         // setFormData({title:"",tagline:"",text:"",image:"",isPinned:false,background_color:""});
     }
 
-    const getNotes = async () =>{
+    const getNotes = useCallback(async()=>{
+        dispatch({type:GET_NOTE_LOADING});
         try {
             const response = await fetch(`http://localhost:8080/notes/getNotes?page=${state.page}`,{
                 method:"GET",
                 headers:{"Content-Type":"application/json"}
             });
             const result = await response.json();
-            console.log(result);
+            dispatch({type:GET_NOTE_SUCCESS,payload:result.result});
         } catch (error) {
-            console.log(error.message);
+            dispatch({type:GET_NOTE_ERROR,payload:error.message});
         }
-    }
-
+    },[state.page]);
+    
     return (
     <NotesContext.Provider value={[state,dispatch,createNote,getNotes]}>
         {children}
