@@ -1,5 +1,5 @@
 import { createContext , useCallback, useReducer } from 'react';
-import { GET_NOTE_ERROR, GET_NOTE_LOADING, GET_NOTE_SUCCESS } from './actionType';
+import { GET_NOTE_ERROR, GET_NOTE_LOADING, GET_NOTE_SUCCESS, ISCLICKED_FALSE, POST_NOTE_ERROR, POST_NOTE_LOADING, POST_NOTE_SUCCESS, RESET_FORM_DATA } from './actionType';
 import { Reducer } from './Reducer';
 
 const initState={
@@ -18,7 +18,10 @@ const initState={
     },
     setImage:false,
     isClicked:false,
-    showColorImageBox:false
+    showColorImageBox:false,
+    showNotes:false,
+    showCreateColorImagePalette:false,
+    showNoteColorImagePalette:false
 }
 
 export const NotesContext = createContext();
@@ -27,6 +30,7 @@ export default function NotesContextProviderWrapper({children}){
     const [state,dispatch]=useReducer(Reducer,initState);
 
     const createNote=async()=>{
+        dispatch({type:POST_NOTE_LOADING});
         try {
           const response = await fetch("http://localhost:8080/notes/createNote",{
             method:"POST",
@@ -34,14 +38,17 @@ export default function NotesContextProviderWrapper({children}){
             headers:{"Content-Type":"application/json"}
           });
           const result = await response.json();
+          dispatch({type:POST_NOTE_SUCCESS,payload:result.createdNote});
           console.log(result);
         } catch (error) {
-          console.log(error.message);
+            dispatch({type:POST_NOTE_ERROR,payload:error.message});
         }
-        // setFormData({title:"",tagline:"",text:"",image:"",isPinned:false,background_color:""});
+        dispatch({type:ISCLICKED_FALSE});
+        dispatch({type:RESET_FORM_DATA});
     }
 
     const getNotes = useCallback(async()=>{
+        console.log("loading notes...");
         dispatch({type:GET_NOTE_LOADING});
         try {
             const response = await fetch(`http://localhost:8080/notes/getNotes?page=${state.page}`,{

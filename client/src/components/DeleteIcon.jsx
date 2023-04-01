@@ -5,14 +5,16 @@ import {  RESET_IMAGE } from '../context/actionType';
 
 export const DeleteIcon = ()=>{
     const [,dispatch]=useContext(NotesContext);
+    
 
     //deleting uploaded image
     const deleteImage=()=>{
         dispatch({type:RESET_IMAGE});
     }
+    //Delete Icon Component
     return (
-        <Box onClick={deleteImage} width="50px" height="50px"  marginTop="-60px" marginLeft="620px" zIndex="1">
-            <Image height="40px" widht="40px" src='./trash.png' alt="Trash" />
+        <Box onClick={deleteImage} marginTop={["-45px","-47px","-50px"]} marginLeft={["265px","405px","550px"]}>
+            <Image width={["28px","40px","47px"]} height={["28px","45x","47px"]}  src='./trash.png' alt="Trash" />
         </Box>
     );
 }

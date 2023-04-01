@@ -1,4 +1,4 @@
-import { DECREMENT_PAGE, GET_NOTE_ERROR, GET_NOTE_LOADING, GET_NOTE_SUCCESS, INCREMENT_PAGE, ISCLICKED_FALSE, ISCLICKED_TRUE, RESET_BACKGROUND_IMAGE, RESET_FORM_DATA, RESET_IMAGE, SET_BACKGROUND_COLOR, SET_BACKGROUND_IMAGE, SET_FORM_DATA, SET_IMAGE, SET_IMAGE_FALSE, SET_IMAGE_TRUE, SET_ISPINNED, SHOW_COLOR_IMAGE_FALSE, SHOW_COLOR_IMAGE_TRUE } from "./actionType";
+import { DECREMENT_PAGE, GET_NOTE_ERROR, GET_NOTE_LOADING, GET_NOTE_SUCCESS, INCREMENT_PAGE, ISCLICKED_FALSE, ISCLICKED_TRUE, POST_NOTE_ERROR, POST_NOTE_LOADING, POST_NOTE_SUCCESS, RESET_BACKGROUND_IMAGE, RESET_FORM_DATA, RESET_IMAGE, SET_BACKGROUND_COLOR, SET_BACKGROUND_IMAGE, SET_FORM_DATA, SET_IMAGE, SET_IMAGE_FALSE, SET_IMAGE_TRUE, SET_ISPINNED, SHOW_COLOR_IMAGE_FALSE, SHOW_COLOR_IMAGE_TRUE, SHOW_NOTES_FALSE, SHOW_NOTES_TRUE } from "./actionType";
 
 export const Reducer = ( state, action )=>{
     const { type, payload } = action ;
@@ -132,6 +132,38 @@ export const Reducer = ( state, action )=>{
                 isLoading:false,
                 isSuccess:false,
                 isError:true
+            }
+        case POST_NOTE_LOADING:
+            return {
+                ...state,
+                isLoading:true,
+                isError:false,
+                isSuccess:false
+            }
+        case POST_NOTE_SUCCESS:
+            return {
+                ...state,
+                isLoading:false,
+                isSuccess:true,
+                isError:false,
+                notes:[...state.notes,payload]
+            }
+        case POST_NOTE_ERROR:
+            return {
+                ...state,
+                isLoading:false,
+                isSuccess:false,
+                isError:true
+            }
+        case SHOW_NOTES_TRUE:
+            return {
+                ...state,
+                showNotes:true
+            }
+        case SHOW_NOTES_FALSE:
+            return {
+                ...state,
+                showNotes:false
             }
         default : 
             return state;

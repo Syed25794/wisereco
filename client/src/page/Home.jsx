@@ -1,7 +1,6 @@
 import { Box, Button } from '@chakra-ui/react'
 import React, { useContext, useEffect } from 'react'
-import InputBox from '../components/InputBox'
-import Note from '../components/Note'
+import CreateNoteContainer from '../components/CreateNoteContainer'
 import NotePopUp from '../components/NotePopUp'
 import { DECREMENT_PAGE, INCREMENT_PAGE, ISCLICKED_FALSE, RESET_FORM_DATA, SHOW_COLOR_IMAGE_FALSE } from '../context/actionType'
 import { NotesContext } from '../context/NoteContext'
@@ -9,7 +8,6 @@ import { NotesContext } from '../context/NoteContext'
 const Home = () => {
   const [state,dispatch,,getNotes]=useContext(NotesContext);
   const { page , notes } = state;
-  console.log(state);
 
   useEffect(()=>{
     getNotes();
@@ -38,10 +36,9 @@ const Home = () => {
 
   return (
     <Box onClick={hideInputs}>
-        <Button colorScheme="blue" onClick={()=>handlePage(1)} variant="ghost" disabled={ notes.length < 6 }>Next</Button>
-        <Button colorScheme="blue" onClick={()=>handlePage(-1)} variant="ghost" disabled={ page === 1}>Previous</Button>
-        <InputBox />
-        <Note />
+        <Button colorScheme="blue" onClick={()=>handlePage(1)} variant="ghost" isDisabled={ notes?.length < 6 }>Next</Button>
+        <Button colorScheme="blue" onClick={()=>handlePage(-1)} variant="ghost" isDisabled = { page <= 1 } >Previous</Button>
+        <CreateNoteContainer />
         <NotePopUp />
     </Box>
   )
