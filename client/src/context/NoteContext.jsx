@@ -24,8 +24,7 @@ const initState={
     },
     setImage:false,
     isClicked:false,
-    showColorImageBox:false,
-    showNotes:false
+    showColorImageBox:false
 }
 
 //Creating Context for Notes

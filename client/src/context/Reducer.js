@@ -179,16 +179,6 @@ export const Reducer = ( state, action )=>{
                 isSuccess:false,
                 isError:true
             }
-        case SHOW_NOTES_TRUE:
-            return {
-                ...state,
-                showNotes:true
-            }
-        case SHOW_NOTES_FALSE:
-            return {
-                ...state,
-                showNotes:false
-            }
         case POPULATE_FORM_DATA:
             return {
                 ...state,

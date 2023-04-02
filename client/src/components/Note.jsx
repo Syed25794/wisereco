@@ -1,7 +1,6 @@
 import { Box, Image, useDisclosure } from "@chakra-ui/react";
 import { useContext } from "react";
 import { NotesContext } from "../context/NoteContext";
-// import { SHOW_NOTES_FALSE, SHOW_NOTES_TRUE } from "../context/actionType";
 import DeleteAlert from "./DeleteAlert";
 import NotePopUp from "./NotePopUp";
 import { POPULATE_FORM_DATA } from "../context/actionType";
