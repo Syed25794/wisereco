@@ -37,6 +37,7 @@ const createNote = async ( req, res )=>{
     try {
 
         let newImage = image ; 
+        console.log(newImage,"image");
         if( image ){
             const imageResponse = await cloudinary.uploader.upload(image,{
                 upload_preset:"wiser_eco"
@@ -45,7 +46,7 @@ const createNote = async ( req, res )=>{
                 newImage=imageResponse
             }
         }
-        
+        console.log(newImage,"image after");
         //Creating an instance of note schema
         const newNote = new Note({
             title,
