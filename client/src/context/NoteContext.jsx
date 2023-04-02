@@ -2,6 +2,8 @@ import { createContext , useCallback, useReducer } from 'react';
 import { GET_NOTE_ERROR, GET_NOTE_LOADING, GET_NOTE_SUCCESS, ISCLICKED_FALSE, POST_NOTE_ERROR, POST_NOTE_LOADING, POST_NOTE_SUCCESS, RESET_FORM_DATA } from './actionType';
 import { Reducer } from './Reducer';
 
+
+//Initial State
 const initState={
     notes:[],
     page:1,
@@ -23,16 +25,16 @@ const initState={
     setImage:false,
     isClicked:false,
     showColorImageBox:false,
-    showNotes:false,
-    showCreateColorImagePalette:false,
-    showNoteColorImagePalette:false
+    showNotes:false
 }
 
+//Creating Context for Notes
 export const NotesContext = createContext();
 
 export default function NotesContextProviderWrapper({children}){
     const [state,dispatch]=useReducer(Reducer,initState);
 
+    //Notes creating function 
     const createNote=async()=>{
         dispatch({type:POST_NOTE_LOADING});
         try {
@@ -51,6 +53,7 @@ export default function NotesContextProviderWrapper({children}){
         dispatch({type:RESET_FORM_DATA});
     }
 
+    //Notes fetching function
     const getNotes = useCallback(async()=>{
         dispatch({type:GET_NOTE_LOADING});
         try {
@@ -65,6 +68,7 @@ export default function NotesContextProviderWrapper({children}){
         }
     },[state.page]);
     
+    //Defining Context
     return (
     <NotesContext.Provider value={[state,dispatch,createNote,getNotes]}>
         {children}

@@ -1,5 +1,6 @@
-import { DECREMENT_PAGE, DELETE_NOTE_ERROR, DELETE_NOTE_LOADING, DELETE_NOTE_SUCCESS, GET_NOTE_ERROR, GET_NOTE_LOADING, GET_NOTE_SUCCESS, INCREMENT_PAGE, ISCLICKED_FALSE, ISCLICKED_TRUE, POPULATE_FORM_DATA, POST_NOTE_ERROR, POST_NOTE_LOADING, POST_NOTE_SUCCESS, RESET_BACKGROUND_IMAGE, RESET_FORM_DATA, RESET_IMAGE, SET_BACKGROUND_COLOR, SET_BACKGROUND_IMAGE, SET_FORM_DATA, SET_IMAGE, SET_IMAGE_FALSE, SET_IMAGE_TRUE, SET_ISPINNED, SHOW_COLOR_IMAGE_FALSE, SHOW_COLOR_IMAGE_TRUE, SHOW_NOTES_FALSE, SHOW_NOTES_TRUE } from "./actionType";
+import { DECREMENT_PAGE, DELETE_NOTE_ERROR, DELETE_NOTE_LOADING, DELETE_NOTE_SUCCESS, GET_NOTE_ERROR, GET_NOTE_LOADING, GET_NOTE_SUCCESS, INCREMENT_PAGE, ISCLICKED_FALSE, ISCLICKED_TRUE, POPULATE_FORM_DATA, POST_NOTE_ERROR, POST_NOTE_LOADING, POST_NOTE_SUCCESS, RESET_BACKGROUND_IMAGE, RESET_FORM_DATA, RESET_IMAGE, SET_BACKGROUND_COLOR, SET_BACKGROUND_IMAGE, SET_FORM_DATA, SET_IMAGE, SET_IMAGE_FALSE, SET_IMAGE_TRUE, SET_ISPINNED, SHOW_COLOR_IMAGE_FALSE, SHOW_COLOR_IMAGE_TRUE, SHOW_NOTES_FALSE, SHOW_NOTES_TRUE, UPDATE_NOTE_ERROR, UPDATE_NOTE_LOADING, UPDATE_NOTE_SUCCESS } from "./actionType";
 
+//Reducer function 
 export const Reducer = ( state, action )=>{
     const { type, payload } = action ;
     console.log(type,payload,state);
@@ -199,8 +200,29 @@ export const Reducer = ( state, action )=>{
                     text:payload.text,
                     isPinned:payload.isPinned,
                     background_color:payload.background_color,
-                    image:payload.image.url
+                    image:payload.image
                 }
+            }
+        case UPDATE_NOTE_LOADING:
+            return {
+                ...state,
+                isLoading:true,
+                isError:false,
+                isSuccess:false
+            }
+        case UPDATE_NOTE_SUCCESS:
+            return {
+                ...state,
+                isLoading:false,
+                isError:false,
+                isSuccess:true
+            }
+        case UPDATE_NOTE_ERROR:
+            return {
+                ...state,
+                isLoading:false,
+                isError:true,
+                isSuccess:false
             }
         default : 
             return state;

@@ -25,13 +25,6 @@ const Note = ({data}) => {
     onOpenSecond();
   };
   
-  // useEffect(()=>{
-  //   if( data ){
-  //     dispatch({type:SHOW_NOTES_TRUE});
-  //   }else{
-  //     dispatch({type:SHOW_NOTES_FALSE});
-  //   }
-  // },[dispatch,data]);
 
   return (
     <Box width={["250px","300px","350px","400px"]} onClick={(e)=>handleOpenFirstModal(e,data)}>

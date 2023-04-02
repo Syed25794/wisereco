@@ -7,7 +7,6 @@ function DeleteAlert({onClose,isOpen , id }) {
     const cancelRef = React.useRef();
     const [state,dispatch]=useContext(NotesContext);
     const { isLoading  } = state ;
-    // console.log(isLoading,notes,isSuccess,isError);
 
     const handleDelete=async()=>{
         dispatch({type:DELETE_NOTE_LOADING});
@@ -29,14 +28,7 @@ function DeleteAlert({onClose,isOpen , id }) {
   
     return (
       <>
-        <AlertDialog
-          size={["xs","md","lg"]}
-          isOpen={isOpen}
-          leastDestructiveRef={cancelRef}
-          onClose={onClose}
-          isCentered={true}
-          motionPreset='slideInRight'
-        >
+        <AlertDialog size={["xs","md","lg"]}  isOpen={isOpen}  leastDestructiveRef={cancelRef}  onClose={onClose}  isCentered={true}  motionPreset='slideInRight'>
           <AlertDialogOverlay>
             <AlertDialogContent>
               <AlertDialogHeader fontSize={['sm','md','lg']} fontWeight='bold'>

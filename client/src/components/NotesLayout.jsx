@@ -9,6 +9,7 @@ export const NotesLayout = ()=>{
     const { notes, page } = state ; 
 
 
+    //Handling page function 
     const handlePage=(value)=>{
         switch(value){
           case 1:
@@ -24,11 +25,13 @@ export const NotesLayout = ()=>{
 
     return (
         <Box>
+            {/* Handling page of the dashboard */}
             <Box display="flex" justifyContent="center" alignContent="center" gap={[2,4,6]}>
                 <Button size={["xs","sm","md"]} fontSize={["xs","md","lg"]}  colorScheme="blue" onClick={()=>handlePage(1)} variant="solid" isDisabled={ notes?.length < 6 }>Next</Button>
                 <Text color="red" marginTop={["2px","4px","6px"]} fontSize={["sm","md","lg"]} fontWeight="bold">{page}</Text>
                 <Button size={["xs","sm","md"]} fontSize={["sm","md","lg"]}  colorScheme="blue" onClick={()=>handlePage(-1)} variant="solid" isDisabled = { page <= 1 } >Previous</Button>
             </Box>
+            {/* Grid Layout of notes  */}
             <SimpleGrid  columns={[1,1,2,2,3]} spacing={["10px","15px","15px"]} marginTop={["15px","20px","30px"]} padding="10px" >
                 {notes?.map((note)=>{
                     return <Note data={note} key={note._id}  />
