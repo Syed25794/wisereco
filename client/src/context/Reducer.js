@@ -1,4 +1,4 @@
-import { DECREMENT_PAGE, DELETE_NOTE_ERROR, DELETE_NOTE_LOADING, DELETE_NOTE_SUCCESS, GET_NOTE_ERROR, GET_NOTE_LOADING, GET_NOTE_SUCCESS, INCREMENT_PAGE, ISCLICKED_FALSE, ISCLICKED_TRUE, POST_NOTE_ERROR, POST_NOTE_LOADING, POST_NOTE_SUCCESS, RESET_BACKGROUND_IMAGE, RESET_FORM_DATA, RESET_IMAGE, SET_BACKGROUND_COLOR, SET_BACKGROUND_IMAGE, SET_FORM_DATA, SET_IMAGE, SET_IMAGE_FALSE, SET_IMAGE_TRUE, SET_ISPINNED, SHOW_COLOR_IMAGE_FALSE, SHOW_COLOR_IMAGE_TRUE, SHOW_NOTES_FALSE, SHOW_NOTES_TRUE } from "./actionType";
+import { DECREMENT_PAGE, DELETE_NOTE_ERROR, DELETE_NOTE_LOADING, DELETE_NOTE_SUCCESS, GET_NOTE_ERROR, GET_NOTE_LOADING, GET_NOTE_SUCCESS, INCREMENT_PAGE, ISCLICKED_FALSE, ISCLICKED_TRUE, POPULATE_FORM_DATA, POST_NOTE_ERROR, POST_NOTE_LOADING, POST_NOTE_SUCCESS, RESET_BACKGROUND_IMAGE, RESET_FORM_DATA, RESET_IMAGE, SET_BACKGROUND_COLOR, SET_BACKGROUND_IMAGE, SET_FORM_DATA, SET_IMAGE, SET_IMAGE_FALSE, SET_IMAGE_TRUE, SET_ISPINNED, SHOW_COLOR_IMAGE_FALSE, SHOW_COLOR_IMAGE_TRUE, SHOW_NOTES_FALSE, SHOW_NOTES_TRUE } from "./actionType";
 
 export const Reducer = ( state, action )=>{
     const { type, payload } = action ;
@@ -93,6 +93,7 @@ export const Reducer = ( state, action )=>{
         case RESET_FORM_DATA:
             return {
                 ...state,
+                isPopUpOpen:false,
                 formData:{
                     title:"",
                     tagline:"",
@@ -187,6 +188,19 @@ export const Reducer = ( state, action )=>{
             return {
                 ...state,
                 showNotes:false
+            }
+        case POPULATE_FORM_DATA:
+            return {
+                ...state,
+                isPopUpOpen:true,
+                formData:{
+                    title:payload.title,
+                    tagline:payload.tagline,
+                    text:payload.text,
+                    isPinned:payload.isPinned,
+                    background_color:payload.background_color,
+                    image:payload.image.url
+                }
             }
         default : 
             return state;

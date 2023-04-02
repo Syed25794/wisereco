@@ -1,9 +1,10 @@
 import { Box, Image, useDisclosure } from "@chakra-ui/react";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { NotesContext } from "../context/NoteContext";
-import { SHOW_NOTES_FALSE, SHOW_NOTES_TRUE } from "../context/actionType";
+// import { SHOW_NOTES_FALSE, SHOW_NOTES_TRUE } from "../context/actionType";
 import DeleteAlert from "./DeleteAlert";
 import NotePopUp from "./NotePopUp";
+import { POPULATE_FORM_DATA } from "../context/actionType";
 
 
 
@@ -12,8 +13,10 @@ const Note = ({data}) => {
   const { isOpen: isOpenFirst, onOpen: onOpenFirst, onClose: onCloseFirst } = useDisclosure();
   const { isOpen: isOpenSecond, onOpen: onOpenSecond, onClose: onCloseSecond } = useDisclosure();
 
-
-  const handleOpenFirstModal = () => {
+  const handleOpenFirstModal = (e,data) => {
+    e.stopPropagation();
+    console.log("popup",data);
+    dispatch({type:POPULATE_FORM_DATA,payload:data})
     onOpenFirst();
   };
 
@@ -22,29 +25,29 @@ const Note = ({data}) => {
     onOpenSecond();
   };
   
-  useEffect(()=>{
-    if( data ){
-      dispatch({type:SHOW_NOTES_TRUE});
-    }else{
-      dispatch({type:SHOW_NOTES_FALSE});
-    }
-  },[dispatch,data]);
+  // useEffect(()=>{
+  //   if( data ){
+  //     dispatch({type:SHOW_NOTES_TRUE});
+  //   }else{
+  //     dispatch({type:SHOW_NOTES_FALSE});
+  //   }
+  // },[dispatch,data]);
 
   return (
-    <Box width={["250px","300px","350px","400px"]} onClick={handleOpenFirstModal}>
+    <Box width={["250px","300px","350px","400px"]} onClick={(e)=>handleOpenFirstModal(e,data)}>
       
       <Box boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px" borderRadius="9px" backgroundRepeat="no-repeat" backgroundSize="cover" backgroundColor={ data.background !== "" ? data.background :"white"} backgroundImage={ data.image !== "" ? `url(${data.background})` : null}>
         {/* Delete Alert Modal */}
         {/* Pinned Icon  and deleteIcon*/}
         <Box display="flex" justifyContent="space-between" p="5px 10px">
-          <Image onClick={handleOpenFirstModal} padding={["2px 3px","2px 3px","3px 5px"]} name="isPinned" borderRadius="5px" _hover={{backgroundColor:"blue.500"}} backgroundColor={data.isPinned ? "blue.500" :"none"} width={["28px","40px","47px"]} height={["28px","35px","47px"]} src="./pin.png" alt="Pinned Note" />
-          <NotePopUp onClose={onCloseFirst} isOpen={isOpenFirst} data={data} />
+          <Image onClick={()=>handleOpenFirstModal(data)} padding={["2px 3px","2px 3px","3px 5px"]} name="isPinned" borderRadius="5px" _hover={{backgroundColor:"blue.500"}} backgroundColor={data.isPinned ? "blue.500" :"none"} width={["28px","40px","47px"]} height={["28px","35px","47px"]} src="./pin.png" alt="Pinned Note" />
+          <NotePopUp onClose={onCloseFirst} isOpen={isOpenFirst} noteData={data} />
           <DeleteAlert onClose={onCloseSecond} isOpen={isOpenSecond} id={data._id} />
           <Image onClick={handleOpenSecondModal}  padding={["2px 3px","2px 3px","3px 5px"]} name="delete" borderRadius="5px" _hover={{backgroundColor:"red.700"}} width={["28px","40px","47px"]} height={["28px","35px","47px"]}  src='./trash.png' alt="Trash" />
         </Box>
         
         {/* Uploaded Image preview */}
-        { data.image !== "" ?
+        { data.image !== "" && data.image !== undefined  ?
           <>
             <Image borderRadius="9px 9px 0px 0px" width="full" src={data.image.url} alt="Image Preview" />
           </> : null 

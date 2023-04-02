@@ -11,6 +11,7 @@ const initState={
     isLoading:false,
     isSuccess:false,
     isError:false,
+    isPopUpOpen:false,
     formData:{
         title:"",
         tagline:"",
