@@ -2,7 +2,7 @@ import { DECREMENT_PAGE, DELETE_NOTE_ERROR, DELETE_NOTE_LOADING, DELETE_NOTE_SUC
 
 export const Reducer = ( state, action )=>{
     const { type, payload } = action ;
-    console.log(type,payload);
+    console.log(type,payload,state);
     switch( type ){
         case ISCLICKED_TRUE:
             return {
@@ -147,7 +147,7 @@ export const Reducer = ( state, action )=>{
                 isLoading:false,
                 isSuccess:true,
                 isError:false,
-                notes:[...state.notes,payload]
+                notes:[payload, ...state.notes]
             }
         case POST_NOTE_ERROR:
             return {

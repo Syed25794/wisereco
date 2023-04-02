@@ -22,7 +22,7 @@ const Home = () => {
 
 
   return (
-    <Box onClick={hideInputs}>
+    <Box onClick={hideInputs} mt={["10px","15px","20px"]}>
         <CreateNoteContainer />
         <NotesLayout />
         <NotePopUp />

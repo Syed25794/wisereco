@@ -34,7 +34,6 @@ export default function NotesContextProviderWrapper({children}){
 
     const createNote=async()=>{
         dispatch({type:POST_NOTE_LOADING});
-        console.log(state.formData,"inside");
         try {
           const response = await fetch("http://localhost:8080/notes/createNote",{
             method:"POST",
@@ -43,16 +42,15 @@ export default function NotesContextProviderWrapper({children}){
           });
           const result = await response.json();
           dispatch({type:POST_NOTE_SUCCESS,payload:result.createdNote});
-          console.log(result);
         } catch (error) {
             dispatch({type:POST_NOTE_ERROR,payload:error.message});
         }
+        getNotes();
         dispatch({type:ISCLICKED_FALSE});
         dispatch({type:RESET_FORM_DATA});
     }
 
     const getNotes = useCallback(async()=>{
-        console.log("loading notes...");
         dispatch({type:GET_NOTE_LOADING});
         try {
             const response = await fetch(`http://localhost:8080/notes/getNotes?page=${state.page}`,{

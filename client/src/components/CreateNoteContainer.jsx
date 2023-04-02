@@ -67,7 +67,7 @@ const CreateNoteContainer = () => {
 
   return (
     <Box onClick={showInputs} width={["300px","460px","620px"]} maxH={["450px","550px","700px"]} m="auto" marginBottom="20px" marginTop="10px" >
-      <Box boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px" borderRadius="9px" width="full" overflow="hidden" backgroundRepeat="no-repeat" backgroundSize="cover" backgroundColor={ !setImage ? formData.background :"white"} backgroundImage={setImage ? `url(${formData.background})` : null}>
+      <Box boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px" borderRadius="9px" width="full" overflow="hidden" backgroundRepeat="no-repeat" backgroundSize="cover" backgroundColor={ !setImage ? formData.background_color :"white"} backgroundImage={setImage ? `url(${formData.background_color})` : null}>
 
         {/* Uploaded Image preview and deleteIcon */}
         <Box>
@@ -89,7 +89,7 @@ const CreateNoteContainer = () => {
               <InputField type={"text"} name={"tagline"} value={formData.tagline} placeholder={"Enter Tagline..."} required/>
             </> : null 
           }
-          <InputField   type={"text"} name={"text"} value={formData.text} placeholder={"Take a note..."} required/>
+          <InputField type={"text"} name={"text"} value={formData.text} placeholder={"Take a note..."} required/>
         </Box>
 
         {/* Pinned Icon */}
@@ -102,7 +102,7 @@ const CreateNoteContainer = () => {
       { isClicked ?
         (
           //Background Color and Image Icon and Upload Image Icon
-          <Box display="flex" justifyContent="space-between" margin={["4px","2px 7px","5px 15px"]}>
+          <Box display="flex" justifyContent="space-between" margin={["4px","2px 7px","5px 15px"]} >
             <Box display="flex" gap={["3px","5px","10px"]}>
               <Image onClick={handleShowPalatte} width={["28px","40px","47px"]} height={["28px","40x","47px"]} padding={["2px 3px","2px 3px","3px 5px"]} _hover={{background:"blue.500",borderRadius:"5px"}}  src="./palette.png" alt="Drawing Plate" />
               <label htmlFor="inputFile"><Image width={["28px","40px","47px"]} height={["28px","40x","47px"]} padding={["2px 3px","2px 3px","3px 5px"]} _hover={{background:"blue.500",borderRadius:"5px"}}  src="./image.png" alt="Upload Image" /></label>

@@ -1,5 +1,5 @@
 import { Box, Image, useDisclosure } from "@chakra-ui/react";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { NotesContext } from "../context/NoteContext";
 import { SHOW_NOTES_FALSE, SHOW_NOTES_TRUE } from "../context/actionType";
 import DeleteAlert from "./DeleteAlert";
@@ -11,16 +11,14 @@ const Note = ({data}) => {
   const [,dispatch]=useContext(NotesContext);
   const { isOpen: isOpenFirst, onOpen: onOpenFirst, onClose: onCloseFirst } = useDisclosure();
   const { isOpen: isOpenSecond, onOpen: onOpenSecond, onClose: onCloseSecond } = useDisclosure();
-  const [selectedModal, setSelectedModal] = useState(1);
-  console.log(selectedModal);
+
 
   const handleOpenFirstModal = () => {
-    setSelectedModal(1);
     onOpenFirst();
   };
 
-  const handleOpenSecondModal = () => {
-    setSelectedModal(2);
+  const handleOpenSecondModal = (e) => {
+    e.stopPropagation();
     onOpenSecond();
   };
   
@@ -33,7 +31,7 @@ const Note = ({data}) => {
   },[dispatch,data]);
 
   return (
-    <Box width={["250px","300px","350px","400px"]}>
+    <Box width={["250px","300px","350px","400px"]} onClick={handleOpenFirstModal}>
       
       <Box boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px" borderRadius="9px" backgroundRepeat="no-repeat" backgroundSize="cover" backgroundColor={ data.background !== "" ? data.background :"white"} backgroundImage={ data.image !== "" ? `url(${data.background})` : null}>
         {/* Delete Alert Modal */}
@@ -53,7 +51,7 @@ const Note = ({data}) => {
         }
 
         {/* Tagline of note */}
-        <Box padding={["2px 3px","2px 3px","3px 5px"]} textAlign="center" wordBreak="break-word" backgroundColor={ data.background_color[0] === "#" ? data.background_color : null } backgroundImage={data.background_color[0] === "h" ? `url(${data.background_color})` : null } fontSize={["sm","md","lg"]}>
+        <Box padding={["2px 3px","3px 5px","5px 10px"]} textAlign="center" wordBreak="break-word" backgroundColor={ data.background_color[0] === "#" ? data.background_color : null } backgroundImage={data.background_color[0] === "h" ? `url(${data.background_color})` : null } fontSize={["sm","md","lg"]}>
           {data.text}
         </Box>
 

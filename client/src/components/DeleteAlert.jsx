@@ -6,8 +6,8 @@ import { DELETE_NOTE_ERROR, DELETE_NOTE_LOADING, DELETE_NOTE_SUCCESS } from "../
 function DeleteAlert({onClose,isOpen , id }) {
     const cancelRef = React.useRef();
     const [state,dispatch]=useContext(NotesContext);
-    const { isLoading , notes, isSuccess, isError } = state ;
-    console.log(isLoading,notes,isSuccess,isError);
+    const { isLoading  } = state ;
+    // console.log(isLoading,notes,isSuccess,isError);
 
     const handleDelete=async()=>{
         dispatch({type:DELETE_NOTE_LOADING});

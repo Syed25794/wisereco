@@ -7,7 +7,7 @@ import { DeleteIcon } from "./DeleteIcon";
 import { ImagePreview } from "./ImagePreview";
 import { InputField } from "./InputField";
 
-const NotePopUp = ({onClose, isOpen}) => {
+const NotePopUp = ({onClose, isOpen , data }) => {
 
   const [state,dispatch,createNote]=useContext(NotesContext);
   const {showColorImageBox, formData, setImage, isLoading , isSuccess }=state;

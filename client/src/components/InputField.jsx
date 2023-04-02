@@ -17,6 +17,6 @@ export const InputField = ({type,name,value,placeholder})=>{
 
     //Input customized component
     return (
-        <Input size={["xs","md","lg"]} fontSize={["sm","md","lg"]} focusBorderColor={formData.background === "" ? "white" : `${formData.background}`} outline="none" border="none" onChange={handleFormData} type={type} name={name} value={value} placeholder={placeholder} required/>
+        <Input autoComplete="off" size={["xs","md","lg"]} fontSize={["sm","md","lg"]} focusBorderColor={formData.background_color === "" ? "white" : `${formData.background_color}`} outline="none" border="none" onChange={handleFormData} type={type} name={name} value={value} placeholder={placeholder} required/>
     )
 }
