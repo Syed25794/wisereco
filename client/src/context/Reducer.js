@@ -1,7 +1,8 @@
-import { DECREMENT_PAGE, GET_NOTE_ERROR, GET_NOTE_LOADING, GET_NOTE_SUCCESS, INCREMENT_PAGE, ISCLICKED_FALSE, ISCLICKED_TRUE, POST_NOTE_ERROR, POST_NOTE_LOADING, POST_NOTE_SUCCESS, RESET_BACKGROUND_IMAGE, RESET_FORM_DATA, RESET_IMAGE, SET_BACKGROUND_COLOR, SET_BACKGROUND_IMAGE, SET_FORM_DATA, SET_IMAGE, SET_IMAGE_FALSE, SET_IMAGE_TRUE, SET_ISPINNED, SHOW_COLOR_IMAGE_FALSE, SHOW_COLOR_IMAGE_TRUE, SHOW_NOTES_FALSE, SHOW_NOTES_TRUE } from "./actionType";
+import { DECREMENT_PAGE, DELETE_NOTE_ERROR, DELETE_NOTE_LOADING, DELETE_NOTE_SUCCESS, GET_NOTE_ERROR, GET_NOTE_LOADING, GET_NOTE_SUCCESS, INCREMENT_PAGE, ISCLICKED_FALSE, ISCLICKED_TRUE, POST_NOTE_ERROR, POST_NOTE_LOADING, POST_NOTE_SUCCESS, RESET_BACKGROUND_IMAGE, RESET_FORM_DATA, RESET_IMAGE, SET_BACKGROUND_COLOR, SET_BACKGROUND_IMAGE, SET_FORM_DATA, SET_IMAGE, SET_IMAGE_FALSE, SET_IMAGE_TRUE, SET_ISPINNED, SHOW_COLOR_IMAGE_FALSE, SHOW_COLOR_IMAGE_TRUE, SHOW_NOTES_FALSE, SHOW_NOTES_TRUE } from "./actionType";
 
 export const Reducer = ( state, action )=>{
     const { type, payload } = action ;
+    console.log(type,payload);
     switch( type ){
         case ISCLICKED_TRUE:
             return {
@@ -46,7 +47,7 @@ export const Reducer = ( state, action )=>{
                 ...state,
                 formData:{
                     ...state.formData,
-                    background:payload
+                    background_color:payload
                 }
             }
         case SET_BACKGROUND_IMAGE:
@@ -54,7 +55,7 @@ export const Reducer = ( state, action )=>{
                 ...state,
                 formData:{
                     ...state.formData,
-                    background:payload
+                    background_color:payload
                 }
             }
         case RESET_BACKGROUND_IMAGE:
@@ -62,7 +63,7 @@ export const Reducer = ( state, action )=>{
                 ...state,
                 formData:{
                     ...state.formData,
-                    background:""
+                    background_color:""
                 }
         }
         case SET_IMAGE:
@@ -97,7 +98,7 @@ export const Reducer = ( state, action )=>{
                     tagline:"",
                     text:"",
                     isPinned:false,
-                    background:"",
+                    background_color:"",
                     image:""
                 }
             }
@@ -114,14 +115,14 @@ export const Reducer = ( state, action )=>{
         case GET_NOTE_LOADING:
             return {
                 ...state,
-                isLoading:true,
+                isLoadingNotes:true,
                 isError:false,
                 isSuccess:false
             }
         case GET_NOTE_SUCCESS:
             return {
                 ...state,
-                isLoading:false,
+                isLoadingNotes:false,
                 isSuccess:true,
                 isError:false,
                 notes:payload
@@ -129,7 +130,7 @@ export const Reducer = ( state, action )=>{
         case GET_NOTE_ERROR:
             return {
                 ...state,
-                isLoading:false,
+                isLoadingNotes:false,
                 isSuccess:false,
                 isError:true
             }
@@ -149,6 +150,28 @@ export const Reducer = ( state, action )=>{
                 notes:[...state.notes,payload]
             }
         case POST_NOTE_ERROR:
+            return {
+                ...state,
+                isLoading:false,
+                isSuccess:false,
+                isError:true
+            }
+        case DELETE_NOTE_LOADING:
+            return {
+                ...state,
+                isLoading:true,
+                isSuccess:false,
+                isError:false
+            }
+        case DELETE_NOTE_SUCCESS:
+            return {
+                ...state,
+                isLoading:false,
+                isSuccess:true,
+                isError:false,
+                notes:state.notes?.filter((note)=> note._id !== payload )
+            }
+        case DELETE_NOTE_ERROR:
             return {
                 ...state,
                 isLoading:false,

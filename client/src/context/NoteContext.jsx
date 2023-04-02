@@ -5,6 +5,7 @@ import { Reducer } from './Reducer';
 const initState={
     notes:[],
     page:1,
+    isLoadingNotes:false,
     isLoading:false,
     isSuccess:false,
     isError:false,
@@ -14,7 +15,7 @@ const initState={
         text:"",
         image:"",
         isPinned:false,
-        background:""
+        background_color:""
     },
     setImage:false,
     isClicked:false,
@@ -31,6 +32,7 @@ export default function NotesContextProviderWrapper({children}){
 
     const createNote=async()=>{
         dispatch({type:POST_NOTE_LOADING});
+        console.log(state.formData,"inside");
         try {
           const response = await fetch("http://localhost:8080/notes/createNote",{
             method:"POST",

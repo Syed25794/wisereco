@@ -59,6 +59,7 @@ const CreateNoteContainer = () => {
 
   //Creating new note
   const handleCreateNote = ()=>{
+    console.log(formData);
     createNote(state.formData);
   }
 
