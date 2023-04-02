@@ -33,6 +33,7 @@ const createNote = async ( req, res )=>{
 
     //Parsing the data from request object
     const { title, tagline, text, isPinned, background_color, image } = req.body;
+
     try {
 
         let newImage = image ; 
@@ -69,15 +70,29 @@ const updateNote = async (req, res) => {
         //Getting id from params and parsing the data from request object
       const { id } = req.params;
       const { title, tagline, text, isPinned, background_color, image } = req.body;
-
+      let newImage = image ;
       //handling the error if id is not found!
       if (!id) {
         res.status(400).send({ message: "Id is not found!" });
         return;
       }
   
+      //If image uploaded again
+      if( image[0] === 'd'){
+        if( image ){
+            const imageResponse = await cloudinary.uploader.upload(image,{
+                upload_preset:"wiser_eco"
+            });
+            if( imageResponse ){
+                newImage=imageResponse
+            }
+        }
+      }else{
+        newImage = image ;
+      }
+
       //updating the notes data and responding the same.
-      const updatedNote = await Note.findOneAndUpdate({ _id: id }, { title, tagline, text, isPinned, background_color, image }, { new: true });
+      const updatedNote = await Note.findOneAndUpdate({ _id: id }, { title, tagline, text, isPinned, background_color, image:newImage }, { new: true });
       res.status(200).send({ updatedNote });
     } catch (error) {
         //handling the error
