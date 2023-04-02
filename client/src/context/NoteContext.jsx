@@ -10,9 +10,9 @@ const initState={
     isLoadingNotes:false,
     isSuccessNotes:false,
     isErrorNotes:false,
-    isLoading:false,
-    isSuccess:false,
-    isError:false,
+    isLoadingPost:false,
+    isSuccessPost:false,
+    isErrorPost:false,
     isPopUpOpen:false,
     formData:{
         title:"",
@@ -38,12 +38,13 @@ export default function NotesContextProviderWrapper({children}){
     const createNote=async()=>{
         dispatch({type:POST_NOTE_LOADING});
         try {
-          const response = await fetch("http://localhost:8080/notes/createNote",{
+          const response = await fetch("https://wisereco.onrender.com/notes/createNote",{
             method:"POST",
             body:JSON.stringify(state.formData),
             headers:{"Content-Type":"application/json"}
           });
           const result = await response.json();
+          console.log(result,"result");
           dispatch({type:POST_NOTE_SUCCESS,payload:result.createdNote});
         } catch (error) {
             dispatch({type:POST_NOTE_ERROR,payload:error.message});
@@ -57,7 +58,7 @@ export default function NotesContextProviderWrapper({children}){
     const getNotes = useCallback(async()=>{
         dispatch({type:GET_NOTE_LOADING});
         try {
-            const response = await fetch(`http://localhost:8080/notes/getNotes?page=${state.page}`,{
+            const response = await fetch(`https://wisereco.onrender.com/notes/getNotes?page=${state.page}`,{
                 method:"GET",
                 headers:{"Content-Type":"application/json"}
             });

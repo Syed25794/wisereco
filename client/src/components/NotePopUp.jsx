@@ -55,7 +55,7 @@ const NotePopUp = ({onClose, isOpen , noteData }) => {
   const handleUpdateNote=async()=>{
     dispatch({type:UPDATE_NOTE_LOADING});
     try {
-        const response = await fetch(`http://localhost:8080/notes/${noteData._id}`,{
+        const response = await fetch(`https://wisereco.onrender.com/notes/${noteData._id}`,{
             method:"PATCH",
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify(formData)
@@ -65,7 +65,6 @@ const NotePopUp = ({onClose, isOpen , noteData }) => {
         onClose();
         getNotes();
     } catch (error) {
-      console.log(error.message);
         dispatch({type:UPDATE_NOTE_ERROR,payload:error.message});
         onClose();
     }

@@ -139,24 +139,23 @@ export const Reducer = ( state, action )=>{
         case POST_NOTE_LOADING:
             return {
                 ...state,
-                isLoading:true,
-                isError:false,
-                isSuccess:false
+                isLoadingPost:true,
+                isErrorPost:false,
+                isSuccessPost:false
             }
         case POST_NOTE_SUCCESS:
             return {
                 ...state,
-                isLoading:false,
-                isSuccess:true,
-                isError:false,
-                notes:[payload, ...state.notes]
+                isLoadingPost:false,
+                isSuccessPost:true,
+                isErrorPost:false
             }
         case POST_NOTE_ERROR:
             return {
                 ...state,
-                isLoading:false,
-                isSuccess:false,
-                isError:true
+                isLoadingPost:false,
+                isSuccessPost:false,
+                isErrorPost:true
             }
         case DELETE_NOTE_LOADING:
             return {

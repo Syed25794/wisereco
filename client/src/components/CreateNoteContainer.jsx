@@ -11,7 +11,8 @@ import { InputField } from "./InputField";
 
 const CreateNoteContainer = () => {
   const [state,dispatch,createNote]=useContext(NotesContext);
-  const { isClicked, showColorImageBox, formData, setImage, isLoading ,isPopUpOpen }=state;
+  const { isClicked, showColorImageBox, formData, setImage, isLoadingPost ,isPopUpOpen , isSuccessPost, isErrorPost }=state;
+  console.log(isLoadingPost,isErrorPost,isSuccessPost);
 
   
   //handling form data and new note data
@@ -108,7 +109,7 @@ const CreateNoteContainer = () => {
               <label htmlFor="inputFile"><Image width={["28px","40px","47px"]} height={["28px","40x","47px"]} padding={["2px 3px","2px 3px","3px 5px"]} _hover={{background:"blue.500",borderRadius:"5px"}}  src="./image.png" alt="Upload Image" /></label>
               <Input onChange={handleFormData} name="image" id="inputFile" type="file" style={{display:"none"}} />
             </Box>
-            <Button padding="3px 5px" size={["xs","sm","md"]} fontSize={["sm","md","lg"]} colorScheme="blue" variant="solid" isLoading={isLoading} loadingText="Creating Note..." onClick={handleCreateNote}>Create Note</Button>
+            <Button padding="3px 5px" size={["xs","sm","md"]} fontSize={["sm","md","lg"]} colorScheme="blue" variant="solid" isLoading={isLoadingPost} loadingText="Creating Note..." onClick={handleCreateNote}>Create Note</Button>
           </Box>
         ) : null 
       }

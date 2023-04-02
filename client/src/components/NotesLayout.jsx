@@ -8,7 +8,6 @@ export const NotesLayout = ()=>{
     const [state,dispatch]=useContext(NotesContext);
     const { notes, page } = state ; 
 
-
     //Handling page function 
     const handlePage=(value)=>{
         switch(value){
