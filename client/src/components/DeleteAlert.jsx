@@ -1,7 +1,7 @@
 import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { NotesContext } from "../context/NoteContext";
-import { DELETE_NOTE_ERROR, DELETE_NOTE_LOADING, DELETE_NOTE_SUCCESS } from "../context/actionType";
+import { DELETE_NOTE_ERROR, DELETE_NOTE_LOADING, DELETE_NOTE_SUCCESS, RESET_DELETE_FLAGS } from "../context/actionType";
 
 function DeleteAlert({onClose,isOpen , id }) {
     const cancelRef = React.useRef();
@@ -23,6 +23,9 @@ function DeleteAlert({onClose,isOpen , id }) {
             dispatch({type:DELETE_NOTE_ERROR,payload:error.message});
             onClose();
         }
+        setTimeout(()=>{
+            dispatch({type:RESET_DELETE_FLAGS});
+        },2000)
     }
    
   

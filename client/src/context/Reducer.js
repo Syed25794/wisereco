@@ -1,9 +1,8 @@
-import { DECREMENT_PAGE, DELETE_NOTE_ERROR, DELETE_NOTE_LOADING, DELETE_NOTE_SUCCESS, GET_NOTE_ERROR, GET_NOTE_LOADING, GET_NOTE_SUCCESS, INCREMENT_PAGE, ISCLICKED_FALSE, ISCLICKED_TRUE, POPULATE_FORM_DATA, POST_NOTE_ERROR, POST_NOTE_LOADING, POST_NOTE_SUCCESS, RESET_BACKGROUND_IMAGE, RESET_FORM_DATA, RESET_IMAGE, SET_BACKGROUND_COLOR, SET_BACKGROUND_IMAGE, SET_FORM_DATA, SET_IMAGE, SET_IMAGE_FALSE, SET_IMAGE_TRUE, SET_ISPINNED, SHOW_COLOR_IMAGE_FALSE, SHOW_COLOR_IMAGE_TRUE, UPDATE_NOTE_ERROR, UPDATE_NOTE_LOADING, UPDATE_NOTE_SUCCESS } from "./actionType";
+import { DECREMENT_PAGE, DELETE_NOTE_ERROR, DELETE_NOTE_LOADING, DELETE_NOTE_SUCCESS, GET_ALL_INPUTS, GET_NOTE_ERROR, GET_NOTE_LOADING, GET_NOTE_SUCCESS, INCREMENT_PAGE, ISCLICKED_FALSE, ISCLICKED_TRUE, POPULATE_FORM_DATA, POST_NOTE_ERROR, POST_NOTE_LOADING, POST_NOTE_SUCCESS, RESET_ALL_INPUTS, RESET_BACKGROUND_IMAGE, RESET_DELETE_FLAGS, RESET_FORM_DATA, RESET_IMAGE, RESET_POST_FLAGS, RESET_UPDATE_FLAGS, SET_BACKGROUND_COLOR, SET_BACKGROUND_IMAGE, SET_FORM_DATA, SET_IMAGE, SET_IMAGE_FALSE, SET_IMAGE_TRUE, SET_ISPINNED, SHOW_COLOR_IMAGE_FALSE, SHOW_COLOR_IMAGE_TRUE, UPDATE_NOTE_ERROR, UPDATE_NOTE_LOADING, UPDATE_NOTE_SUCCESS } from "./actionType";
 
 //Reducer function 
 export const Reducer = ( state, action )=>{
     const { type, payload } = action ;
-    console.log(type,payload,state);
     switch( type ){
         case ISCLICKED_TRUE:
             return {
@@ -160,24 +159,24 @@ export const Reducer = ( state, action )=>{
         case DELETE_NOTE_LOADING:
             return {
                 ...state,
-                isLoading:true,
-                isSuccess:false,
-                isError:false
+                isLoadingDelete:true,
+                isSuccessDelete:false,
+                isErrorDelete:false
             }
         case DELETE_NOTE_SUCCESS:
             return {
                 ...state,
-                isLoading:false,
-                isSuccess:true,
-                isError:false,
+                isLoadingDelete:false,
+                isSuccessDelete:true,
+                isErrorDelete:false,
                 notes:state.notes?.filter((note)=> note._id !== payload )
             }
         case DELETE_NOTE_ERROR:
             return {
                 ...state,
-                isLoading:false,
-                isSuccess:false,
-                isError:true
+                isLoadingDelete:false,
+                isSuccessDelete:false,
+                isErrorDelete:true
             }
         case POPULATE_FORM_DATA:
             return {
@@ -195,23 +194,54 @@ export const Reducer = ( state, action )=>{
         case UPDATE_NOTE_LOADING:
             return {
                 ...state,
-                isLoading:true,
-                isError:false,
-                isSuccess:false
+                isLoadingUpdate:true,
+                isErrorUpdate:false,
+                isSuccessUpdate:false
             }
         case UPDATE_NOTE_SUCCESS:
             return {
                 ...state,
-                isLoading:false,
-                isError:false,
-                isSuccess:true
+                isLoadingUpdate:false,
+                isErrorUpdate:false,
+                isSuccessUpdate:true
             }
         case UPDATE_NOTE_ERROR:
             return {
                 ...state,
-                isLoading:false,
-                isError:true,
-                isSuccess:false
+                isLoadingUpdate:false,
+                isErrorUpdate:true,
+                isSuccessUpdate:false
+            }
+        case RESET_POST_FLAGS:
+            return {
+                ...state,
+                isLoadingPost:false,
+                isErrorPost:false,
+                isSuccessPost:false
+            }
+        case RESET_DELETE_FLAGS:
+            return {
+                ...state,
+                isLoadingDelete:false,
+                isErrorDelete:false,
+                isSuccessDelete:false
+            }
+        case RESET_UPDATE_FLAGS:
+            return {
+                ...state,
+                isLoadingUpdate:false,
+                isErrorUpdate:false,
+                isSuccessUpdate:false
+            }
+        case GET_ALL_INPUTS:
+            return {
+                ...state,
+                isValidInputs:false
+            }
+        case RESET_ALL_INPUTS:
+            return {
+                ...state,
+                isValidInputs:true
             }
         default : 
             return state;

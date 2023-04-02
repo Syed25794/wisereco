@@ -1,6 +1,6 @@
 import { Box, Button, Image, Input, Modal , ModalOverlay, ModalBody, ModalCloseButton, ModalContent } from "@chakra-ui/react";
 import { useContext} from "react";
-import { SET_FORM_DATA, SET_IMAGE, SET_ISPINNED, SHOW_COLOR_IMAGE_FALSE, SHOW_COLOR_IMAGE_TRUE, UPDATE_NOTE_ERROR, UPDATE_NOTE_LOADING, UPDATE_NOTE_SUCCESS } from "../context/actionType";
+import { RESET_UPDATE_FLAGS, SET_FORM_DATA, SET_IMAGE, SET_ISPINNED, SHOW_COLOR_IMAGE_FALSE, SHOW_COLOR_IMAGE_TRUE, UPDATE_NOTE_ERROR, UPDATE_NOTE_LOADING, UPDATE_NOTE_SUCCESS } from "../context/actionType";
 import { NotesContext } from "../context/NoteContext";
 import ColorImage from "./ColorImage";
 import { DeleteIcon } from "./DeleteIcon";
@@ -9,7 +9,7 @@ import { InputField } from "./InputField";
 
 const NotePopUp = ({onClose, isOpen , noteData }) => {
   const [state,dispatch,,getNotes]=useContext(NotesContext);
-  const {showColorImageBox, formData, isLoading }=state;
+  const {showColorImageBox, formData, isLoadingUpdate }=state;
 
   //handling form data and new note data
   const handleFormData=(e)=>{
@@ -68,6 +68,11 @@ const NotePopUp = ({onClose, isOpen , noteData }) => {
         dispatch({type:UPDATE_NOTE_ERROR,payload:error.message});
         onClose();
     }
+    console.log("outside");
+    setTimeout(()=>{
+      console.log("inside");
+      dispatch({type:RESET_UPDATE_FLAGS});
+    },2000)
   }
   
 
@@ -113,7 +118,7 @@ const NotePopUp = ({onClose, isOpen , noteData }) => {
                 <label htmlFor="inputFile"><Image width={["28px","40px","47px"]} height={["28px","40x","47px"]} padding={["2px 3px","2px 3px","3px 5px"]} _hover={{background:"blue.500",borderRadius:"5px"}}  src="./image.png" alt="Upload Image" /></label>
                 <Input onChange={handleFormData} name="image" id="inputFile" type="file" style={{display:"none"}} />
               </Box>
-                <Button padding="3px 5px" size={["xs","sm","md"]} fontSize={["sm","md","lg"]} colorScheme="blue" variant="solid" isLoading={isLoading} loadingText="Updating Note..." onClick={handleUpdateNote}>Update Note</Button>
+                <Button padding="3px 5px" size={["xs","sm","md"]} fontSize={["sm","md","lg"]} colorScheme="blue" variant="solid" isLoading={isLoadingUpdate} loadingText="Updating Note..." onClick={handleUpdateNote}>Update Note</Button>
               </Box>
             </Box>
 
