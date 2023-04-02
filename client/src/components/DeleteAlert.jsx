@@ -8,6 +8,7 @@ function DeleteAlert({onClose,isOpen , id }) {
     const [state,dispatch]=useContext(NotesContext);
     const { isLoading , notes, isSuccess, isError } = state ;
     console.log(isLoading,notes,isSuccess,isError);
+
     const handleDelete=async()=>{
         dispatch({type:DELETE_NOTE_LOADING});
         try {
@@ -24,6 +25,7 @@ function DeleteAlert({onClose,isOpen , id }) {
             onClose();
         }
     }
+   
   
     return (
       <>

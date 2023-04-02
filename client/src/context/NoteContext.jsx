@@ -6,6 +6,8 @@ const initState={
     notes:[],
     page:1,
     isLoadingNotes:false,
+    isSuccessNotes:false,
+    isErrorNotes:false,
     isLoading:false,
     isSuccess:false,
     isError:false,

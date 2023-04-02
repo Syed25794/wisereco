@@ -116,15 +116,15 @@ export const Reducer = ( state, action )=>{
             return {
                 ...state,
                 isLoadingNotes:true,
-                isError:false,
-                isSuccess:false
+                isErrorNotes:false,
+                isSuccessNotes:false
             }
         case GET_NOTE_SUCCESS:
             return {
                 ...state,
                 isLoadingNotes:false,
-                isSuccess:true,
-                isError:false,
+                isSuccessNotes:true,
+                isErrorNotes:false,
                 notes:payload
             }
         case GET_NOTE_ERROR:
