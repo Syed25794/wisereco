@@ -4,10 +4,11 @@ import CreateNoteContainer from '../components/CreateNoteContainer'
 import { ISCLICKED_FALSE, RESET_FORM_DATA, SHOW_COLOR_IMAGE_FALSE } from '../context/actionType'
 import { NotesContext } from '../context/NoteContext'
 import { NotesLayout } from '../components/NotesLayout';
+import AlertComponent from '../components/AlertComponent'
 
 const Home = () => {
   const [state,dispatch,,getNotes]=useContext(NotesContext);
-  const { isLoadingNotes , isSuccessNotes , isErrorNotes, notes } = state ;
+  const { isLoadingNotes , isSuccessNotes , isErrorNotes, notes , isErrorPost,isSuccessPost } = state ;
 
   useEffect(()=>{
     getNotes();
@@ -44,6 +45,12 @@ const Home = () => {
           <Box display="flex" justifyContent="center" alignItems="center">
             <Text color="red" fontSize={["md","lg","2xl"]}>Something went wrong...!</Text>
           </Box> : null}
+
+        {/* Create Post Success */}
+        { isSuccessPost ? <AlertComponent status="success" description="Note is Created Successfully!" /> : null }
+
+        {/* Create Post Error */}
+        { isErrorPost ? <AlertComponent statu='error' description="Something went wrong!" /> : null }
     </Box>
   )
 }

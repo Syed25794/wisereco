@@ -11,8 +11,7 @@ import { InputField } from "./InputField";
 
 const CreateNoteContainer = () => {
   const [state,dispatch,createNote]=useContext(NotesContext);
-  const { isClicked, showColorImageBox, formData, setImage, isLoadingPost ,isPopUpOpen , isSuccessPost, isErrorPost }=state;
-  console.log(isLoadingPost,isErrorPost,isSuccessPost);
+  const { isClicked, showColorImageBox, formData, setImage, isLoadingPost ,isPopUpOpen }=state;
 
   
   //handling form data and new note data
