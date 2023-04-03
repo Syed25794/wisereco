@@ -60,7 +60,6 @@ const CreateNoteContainer = () => {
 
   //Creating new note
   const handleCreateNote = ()=>{
-    console.log(formData);
     createNote(state.formData);
   }
 
@@ -117,7 +116,7 @@ const CreateNoteContainer = () => {
 
       {/* Color and Image Background Pallete */}
       <Box marginLeft={["20px","30px","40px"]}>
-        { showColorImageBox && isClicked ? <ColorImage /> : null }
+        { showColorImageBox && isClicked && !isPopUpOpen ? <ColorImage /> : null }
       </Box>
 
     </Box>
