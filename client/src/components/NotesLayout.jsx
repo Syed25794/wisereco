@@ -31,7 +31,7 @@ export const NotesLayout = ()=>{
                 <Button size={["xs","sm","md"]} fontSize={["sm","md","lg"]}  colorScheme="blue" onClick={()=>handlePage(-1)} variant="solid" isDisabled = { page <= 1 } >Previous</Button>
             </Box>
             {/* Grid Layout of notes  */}
-            <SimpleGrid  columns={[1,1,2,2,3]} spacing={["10px","15px","15px"]} marginTop={["15px","20px","30px"]} padding="10px" >
+            <SimpleGrid  columns={[1,2,3]} spacing={["10px","20px","25px"]} marginTop={["15px","20px","30px"]} padding="10px" >
                 {notes?.map((note)=>{
                     return <Note data={note} key={note._id}  />
                 })}

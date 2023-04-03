@@ -25,7 +25,7 @@ const Note = ({data}) => {
   
 
   return (
-    <Box width={["250px","300px","350px","400px"]} onClick={(e)=>handleOpenFirstModal(e,data)}>
+    <Box height='fit-content' onClick={(e)=>handleOpenFirstModal(e,data)} >
       
       <Box boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px" borderRadius="9px" backgroundRepeat="no-repeat" backgroundSize="cover" backgroundColor={ data.background !== "" ? data.background :"white"} backgroundImage={ data.image !== "" ? `url(${data.background})` : null}>
         {/* Delete Alert Modal */}
