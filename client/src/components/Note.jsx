@@ -14,7 +14,6 @@ const Note = ({data}) => {
 
   const handleOpenFirstModal = (e,data) => {
     e.stopPropagation();
-    console.log("popup",data);
     dispatch({type:POPULATE_FORM_DATA,payload:data})
     onOpenFirst();
   };
@@ -32,7 +31,7 @@ const Note = ({data}) => {
         {/* Delete Alert Modal */}
         {/* Pinned Icon  and deleteIcon*/}
         <Box display="flex" justifyContent="space-between" p="5px 10px">
-          <Image onClick={()=>handleOpenFirstModal(data)} padding={["2px 3px","2px 3px","3px 5px"]} name="isPinned" borderRadius="5px" _hover={{backgroundColor:"blue.500"}} backgroundColor={data.isPinned ? "blue.500" :"none"} width={["28px","40px","47px"]} height={["28px","35px","47px"]} src="./pin.png" alt="Pinned Note" />
+          <Image onClick={(e)=>handleOpenFirstModal(e,data)} padding={["2px 3px","2px 3px","3px 5px"]} name="isPinned" borderRadius="5px" _hover={{backgroundColor:"blue.500"}} backgroundColor={data.isPinned ? "blue.500" :"none"} width={["28px","40px","47px"]} height={["28px","35px","47px"]} src="./pin.png" alt="Pinned Note" />
           <NotePopUp onClose={onCloseFirst} isOpen={isOpenFirst} noteData={data} />
           <DeleteAlert onClose={onCloseSecond} isOpen={isOpenSecond} id={data._id} />
           <Image onClick={handleOpenSecondModal}  padding={["2px 3px","2px 3px","3px 5px"]} name="delete" borderRadius="5px" _hover={{backgroundColor:"red.700"}} width={["28px","40px","47px"]} height={["28px","35px","47px"]}  src='./trash.png' alt="Trash" />
@@ -41,7 +40,7 @@ const Note = ({data}) => {
         {/* Uploaded Image preview */}
         { data.image !== "" && data.image !== undefined  ?
           <>
-            <Image borderRadius="9px 9px 0px 0px" width="full" src={data.image.url} alt="Image Preview" />
+            <Image borderRadius="9px 9px 0px 0px" width="full" src={data.image.url !== undefined ? data.image.url : data.image} alt="Image Preview" />
           </> : null 
         }
 

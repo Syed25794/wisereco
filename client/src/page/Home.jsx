@@ -53,12 +53,12 @@ const Home = () => {
         {/* Loading Spinner */}
         { isLoadingNotes ? 
           <Box display="flex" flexDir="column" gap={6} justifyContent="center" alignItems="center" >
-            <Text color="purple" fontSize={["md","lg","2xl"]}>Notes are loading...</Text>
+            <Text color="purple" fontSize={["md","lg","2xl"]}>{`Page ${page} Notes are loading...`}</Text>
             <Spinner thickness='4px' speed='0.65s' emptyColor='gray.200' color='blue.500' size='xl'/>
           </Box> : null }
 
         {/* If number of notes are zero */}
-        { isSuccessNotes && notes.length === 0 && page === 0 ?  
+        { isSuccessNotes && notes.length === 0 && page === 1 ?  
           <Box display="flex" justifyContent="center" alignItems="center">
             <Text color="purple" fontSize={["md","lg","2xl"]}>Please create some notes!</Text>
           </Box> : null}

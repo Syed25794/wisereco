@@ -5,7 +5,7 @@ import { DELETE_NOTE_ERROR, DELETE_NOTE_LOADING, DELETE_NOTE_SUCCESS, RESET_DELE
 
 function DeleteAlert({onClose,isOpen , id }) {
     const cancelRef = React.useRef();
-    const [state,dispatch]=useContext(NotesContext);
+    const [state,dispatch,,getNotes]=useContext(NotesContext);
     const { isLoading  } = state ;
 
     const handleDelete=async()=>{
@@ -23,9 +23,10 @@ function DeleteAlert({onClose,isOpen , id }) {
             dispatch({type:DELETE_NOTE_ERROR,payload:error.message});
             onClose();
         }
+        getNotes();
         setTimeout(()=>{
             dispatch({type:RESET_DELETE_FLAGS});
-        },2000)
+        },3000)
     }
    
   

@@ -68,19 +68,17 @@ const NotePopUp = ({onClose, isOpen , noteData }) => {
         dispatch({type:UPDATE_NOTE_ERROR,payload:error.message});
         onClose();
     }
-    console.log("outside");
     setTimeout(()=>{
-      console.log("inside");
       dispatch({type:RESET_UPDATE_FLAGS});
-    },2000)
+    },3000)
   }
   
 
   
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size={["xs","2xl","3xl"]} height="maxH" >
+    <Modal isOpen={isOpen} onClose={onClose} size={["xs","2xl","3xl"]}  >
       <ModalOverlay />
-      <ModalContent justifyContent="center" alignItems="center" >
+      <ModalContent justifyContent="center" alignItems="center" paddingBottom={ showColorImageBox ? "40px" : "0px"} >
         <ModalCloseButton mt={["-10px","-10px","0px"]} />
         <ModalBody mt={["10px","0px","0px"]}>
           <Box width={["300px","460px","620px"]} maxH={["450px","550px","700px"]} m="auto" marginBottom="20px" marginTop="10px" >
@@ -90,7 +88,7 @@ const NotePopUp = ({onClose, isOpen , noteData }) => {
             <Box>
               { formData.image !== "" && formData.image !== undefined  ?
                 <>
-                  <ImagePreview imageUrl={formData.image.url} /> 
+                  <ImagePreview /> 
                   <DeleteIcon /> 
                 </> : null 
               }

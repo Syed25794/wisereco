@@ -65,7 +65,7 @@ export default function NotesContextProviderWrapper({children}){
             dispatch({type:RESET_FORM_DATA});
             setTimeout(()=>{
                 dispatch({type:RESET_POST_FLAGS});
-            },2000)
+            },3000)
         }
     }
 
