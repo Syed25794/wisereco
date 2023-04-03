@@ -8,7 +8,7 @@ const noteSchema = new mongoose.Schema(
     tagline: { type: String, required: true },
     text: { type: String, required: true },
     isPinned: { type: Boolean, default: false },
-    image: { type: Object, default: "" },
+    image: { type: String , default: "" },
     background_color: { type: String, default: "" },
   },
   { timestamps: true, versionKey:false }
