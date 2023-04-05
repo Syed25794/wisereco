@@ -7,4 +7,33 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
+
+
+// let newImage = image ; 
+        // console.log(newImage,"image");
+        // if( image ){
+        //     const imageResponse = await cloudinary.uploader.upload(image,{
+        //         upload_preset:"wiser_eco"
+        //     });
+        //     if( imageResponse ){
+        //         newImage=imageResponse
+        //     }
+        // }
+        // console.log(newImage,"image after");
+
+
+//   //If image uploaded again
+    //   if( image[0] === 'd'){
+    //     if( image ){
+    //         const imageResponse = await cloudinary.uploader.upload(image,{
+    //             upload_preset:"wiser_eco"
+    //         });
+    //         if( imageResponse ){
+    //             newImage=imageResponse
+    //         }
+    //     }
+    //   }else{
+    //     newImage = image ;
+    //   }
+
 module.exports = cloudinary ;
