@@ -1,4 +1,4 @@
-# wisereco
+# Notes Creator
 
 Notes creating application where you can create, update, read and delete notes.
 
