@@ -25,7 +25,7 @@ export const NotesLayout = ()=>{
     return (
         <Box>
             {/* Handling page of the dashboard */}
-            <Box display="flex" justifyContent="center" alignContent="center" gap={[2,4,6]}>
+            <Box display="flex" justifyContent="center" alignContent="center" gap={[2,4,6]} marginTop={["10px","15px","25px"]}>
                 <Button size={["xs","sm","md"]} fontSize={["xs","md","lg"]}  colorScheme="blue" onClick={()=>handlePage(1)} variant="solid" isDisabled={ notes?.length < 6 }>Next</Button>
                 <Text color="red" marginTop={["2px","4px","6px"]} fontSize={["sm","md","lg"]} fontWeight="bold">{page}</Text>
                 <Button size={["xs","sm","md"]} fontSize={["sm","md","lg"]}  colorScheme="blue" onClick={()=>handlePage(-1)} variant="solid" isDisabled = { page <= 1 } >Previous</Button>
