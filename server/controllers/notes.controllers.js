@@ -15,8 +15,13 @@ const getNotes = async ( req, res )=>{
         const endIndex = page * limit ;
 
         //Quering all the pinned and unpinned Notes sorted with latest changed notes
-        const pinnedNotes = await Note.find({ isPinned: true }).sort({ updatedAt: -1 });
-        const unpinnedNotes = await Note.find({isPinned:false}).sort({updatedAt:-1});
+        // Ensure indexes exist on the fields used in sorting
+        await Note.createIndexes({ updatedAt: 1 });
+
+        const pinnedNotes = await Note.find({ isPinned: true }).sort({ updatedAt: -1 }).allowDiskUse(true);
+        const unpinnedNotes = await Note.find({ isPinned: false }).sort({ updatedAt: -1 }).allowDiskUse(true);
+        // const pinnedNotes = await Note.find({ isPinned: true }).sort({ updatedAt: -1 });
+        // const unpinnedNotes = await Note.find({isPinned:false}).sort({updatedAt:-1});
 
         //Combining the all notes and sending only 6 notes as per pinned true and page value
         const combinedNotes = [...pinnedNotes,...unpinnedNotes];
