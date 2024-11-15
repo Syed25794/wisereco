@@ -5,7 +5,7 @@ const cors = require("cors");
 const noteRoutes = require("./routes/notes.routes");
 
 const application = express();
-const { PORT } = process.env || 8000;
+const PORT = process.env.PORT || 8000;
 
 //Using express middleware , cors and defining routes
 application.use(express.json( { limit : '10000kb' , extended : true }));
