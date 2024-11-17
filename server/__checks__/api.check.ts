@@ -1,4 +1,5 @@
 import { ApiCheck, AssertionBuilder, EmailAlertChannel, CheckGroup } from 'checkly/constructs'
+import* as path from 'path';
 
 const alertUsers = [
   {email:'syedgulmohd25794@gmail.com',name:'syed'},
@@ -44,6 +45,7 @@ new ApiCheck('notes-api-check-1', {
 new ApiCheck('notes-api-check-2',{
   name: 'Create Note',
   group: notesAPIGroup,
+  tearDownScript: {content :path.join(__dirname,'./utils/clear.note.ts')},
   alertChannels,
   degradedResponseTime: 10000,
   maxResponseTime: 50000,
@@ -65,3 +67,25 @@ new ApiCheck('notes-api-check-2',{
     ]
   }
 })
+
+// check for delete request of note delete
+
+// new ApiCheck('notes-api-check-3', {
+//   name: 'Delete Note',
+//   group: notesAPIGroup,
+//   setupScript: { entrypoint: path.join(__dirname,'./utils/getId.ts')},
+//   alertChannels,
+//   degradedResponseTime: 10000,
+//   maxResponseTime: 50000,
+//   runParallel: true, 
+//   request: {
+//     url: `https://wisereco.onrender.com/notes/`,
+//     method: 'delete',
+//     skipSSL: false,
+//     followRedirects: true,
+//     assertions: [
+//       AssertionBuilder.statusCode().equals(200),
+//       AssertionBuilder.jsonBody().isNotNull()
+//     ]
+//   }
+// })
