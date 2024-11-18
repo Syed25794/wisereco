@@ -1,6 +1,6 @@
-# Notes Creator
+# Simple Notes
 
-Notes creating application where you can create, update, read and delete notes.
+A feature-rich notes application allows users to create, read, update, and delete notes.
 
 ## Tech Stacks
 
