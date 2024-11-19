@@ -60,9 +60,8 @@ const createNote = async ( req, res )=>{
 
 const updateNote = async (req, res) => {
     try {
-        //Getting id from params and parsing the data from request object
-      const { id } = req.params;
-      const { title, tagline, text, isPinned, background_color, image } = req.body;
+      //Getting id from params and parsing the data from request object
+      const { title, tagline, text, isPinned, background_color, image, id } = req.body;
       //handling the error if id is not found!
       if (!id) {
         res.status(400).send({ message: "Id is not found!" });
@@ -80,7 +79,7 @@ const updateNote = async (req, res) => {
 
 const deleteNote = async ( req, res )=>{
     //Getting id from params and handling the error if id is not found!
-    const { id } = req.params;
+    const { id } = req.body;
     if( !id ){
         res.status(400).send({message:"Id is not found!"});
     }

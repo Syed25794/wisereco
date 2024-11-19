@@ -6,7 +6,7 @@ const noteRoutes = Router();
 //defining all the routes with their http vers
 noteRoutes.get("/getNotes",getNotes);
 noteRoutes.post("/createNote",createNote);
-noteRoutes.patch("/:id",updateNote);
-noteRoutes.delete("/:id",deleteNote);
+noteRoutes.patch("/updateNote",updateNote);
+noteRoutes.delete("/deleteNote",deleteNote);
 
 module.exports = noteRoutes ; 
