@@ -64,16 +64,15 @@ const updateNote = async (req, res) => {
       const { title, tagline, text, isPinned, background_color, image, id } = req.body;
       //handling the error if id is not found!
       if (!id) {
-        res.status(400).send({ message: "Id is not found!" });
-        return;
+        return res.status(400).send({ message: "Id is not found!" });
       }
 
       //updating the notes data and responding the same.
       const updatedNote = await Note.findOneAndUpdate({ _id: id }, { title, tagline, text, isPinned, background_color, image }, { new: true });
-      res.status(200).send({ updatedNote });
+      return res.status(200).send({ updatedNote });
     } catch (error) {
         //handling the error
-      res.status(500).send({ error: error.message });
+      return res.status(500).send({ error: error.message });
     }
   };
 
@@ -81,15 +80,15 @@ const deleteNote = async ( req, res )=>{
     //Getting id from params and handling the error if id is not found!
     const { id } = req.body;
     if( !id ){
-        res.status(400).send({message:"Id is not found!"});
+        return res.status(400).send({message:"Id is not found!"});
     }
     try {
         //deleting the note and responding with true.
         const deletedNote = await Note.deleteOne({_id:id});
-        res.status(200).send({result:true});
+        return res.status(200).send({result:true});
     } catch (error) {
         //handling the error
-        res.status(500).send({error:error.message});
+        return res.status(500).send({error:error.message});
     }
 }
 
