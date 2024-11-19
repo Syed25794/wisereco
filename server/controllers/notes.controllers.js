@@ -79,7 +79,7 @@ const updateNote = async (req, res) => {
 const deleteNote = async ( req, res )=>{
     //Getting id from body and handling the error if id is not found!
     const { id } = req.body;
-    console.log('id',id, !id,req.body);
+  
     if(!id){
         return res.status(400).send({message:"Id is not found!"});
     }
