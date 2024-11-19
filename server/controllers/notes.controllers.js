@@ -84,8 +84,14 @@ const deleteNote = async ( req, res )=>{
     }
     try {
         //deleting the note and responding with true.
-        const deletedNote = await Note.deleteOne({_id:id});
-        return res.status(200).send({result:true});
+        Note.deleteOne({_id:id}).then((result)=>{
+            console.log('result',result);
+            if( result.deletedCount ){
+                return res.status(200).send({result:true});
+            }else{
+                return res.status(400).send({error:'No Record Found!'});
+            }
+        });
     } catch (error) {
         //handling the error
         return res.status(500).send({error:error.message});
