@@ -11,8 +11,9 @@ function DeleteAlert({onClose,isOpen , id }) {
     const handleDelete=async()=>{
         dispatch({type:DELETE_NOTE_LOADING});
         try {
-            const response = await fetch(`https://wisereco.onrender.com/notes/${id}`,{
-                method:"DELETE"
+            const response = await fetch(`https://wisereco.onrender.com/notes/deleteNote`,{
+                method:"DELETE",
+                body: JSON.stringify({ id : id})
             });
             const result = await response.json();
             if( result.result ){

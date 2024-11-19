@@ -55,7 +55,8 @@ const NotePopUp = ({onClose, isOpen , noteData }) => {
   const handleUpdateNote=async()=>{
     dispatch({type:UPDATE_NOTE_LOADING});
     try {
-        const response = await fetch(`https://wisereco.onrender.com/notes/${noteData._id}`,{
+        formData.id = noteData._id;
+        const response = await fetch(`https://wisereco.onrender.com/notes/updateNote`,{
             method:"PATCH",
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify(formData)
