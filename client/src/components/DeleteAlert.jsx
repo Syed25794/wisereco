@@ -13,6 +13,7 @@ function DeleteAlert({onClose,isOpen , id }) {
         try {
             const response = await fetch(`https://wisereco.onrender.com/notes/deleteNote`,{
                 method:"DELETE",
+                headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify({ id : id})
             });
             const result = await response.json();
