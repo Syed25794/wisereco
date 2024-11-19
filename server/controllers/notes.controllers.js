@@ -77,15 +77,15 @@ const updateNote = async (req, res) => {
   };
 
 const deleteNote = async ( req, res )=>{
-    //Getting id from params and handling the error if id is not found!
+    //Getting id from body and handling the error if id is not found!
     const { id } = req.body;
-    if( !id ){
+    console.log('id',id, !id,req.body);
+    if(!id){
         return res.status(400).send({message:"Id is not found!"});
     }
     try {
         //deleting the note and responding with true.
         Note.deleteOne({_id:id}).then((result)=>{
-            console.log('result',result);
             if( result.deletedCount ){
                 return res.status(200).send({result:true});
             }else{
