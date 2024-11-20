@@ -1,4 +1,4 @@
-import { ApiCheck, AssertionBuilder, EmailAlertChannel, CheckGroup, Frequency } from 'checkly/constructs'
+import { ApiCheck, AssertionBuilder, EmailAlertChannel, CheckGroup } from 'checkly/constructs'
 import * as path from 'path';
 
 const alertUsers = [
@@ -44,7 +44,6 @@ new ApiCheck('notes-api-check-1', {
 new ApiCheck('notes-api-check-2',{
   name: 'Create Note',
   group: notesAPIGroup,
-  frequency:Frequency.EVERY_2M,
   tearDownScript: {entrypoint :path.join(__dirname,'./utils/teardown.ts')},
   alertChannels,
   degradedResponseTime: 10000,
