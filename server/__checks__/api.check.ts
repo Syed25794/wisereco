@@ -40,8 +40,7 @@ new ApiCheck('notes-api-check-1', {
   runParallel: true
 })
 
-// check for post request of note creating
-
+// // check for post request of note creating
 new ApiCheck('notes-api-check-2',{
   name: 'Create Note',
   group: notesAPIGroup,
@@ -70,23 +69,49 @@ new ApiCheck('notes-api-check-2',{
 })
 
 // check for delete request of note delete
+new ApiCheck('notes-api-check-3', {
+  name: 'Delete Note',
+  group: notesAPIGroup,
+  setupScript: { entrypoint: path.join(__dirname,'./utils/getId.ts')},
+  alertChannels,
+  degradedResponseTime: 10000,
+  maxResponseTime: 50000,
+  runParallel: true, 
+  request: {
+    url: "https://wisereco.onrender.com/notes/deleteNote",
+    method: 'DELETE',
+    skipSSL: false,
+    followRedirects: true,
+    assertions: [
+      AssertionBuilder.statusCode().equals(200),
+      AssertionBuilder.jsonBody().isNotNull()
+    ]
+  }
+})
 
-// new ApiCheck('notes-api-check-3', {
-//   name: 'Delete Note',
-//   group: notesAPIGroup,
-//   setupScript: { entrypoint: path.join(__dirname,'./utils/getId.ts')},
-//   alertChannels,
-//   degradedResponseTime: 10000,
-//   maxResponseTime: 50000,
-//   runParallel: true, 
-//   request: {
-//     url: `https://wisereco.onrender.com/notes/`,
-//     method: 'delete',
-//     skipSSL: false,
-//     followRedirects: true,
-//     assertions: [
-//       AssertionBuilder.statusCode().equals(200),
-//       AssertionBuilder.jsonBody().isNotNull()
-//     ]
-//   }
-// })
+// check for patch request of note update
+new ApiCheck('notes-api-check-4',{
+  name: 'Update Note',
+  group: notesAPIGroup,
+  setupScript: { entrypoint: path.join(__dirname, './utils/getId.ts')},
+  alertChannels,
+  degradedResponseTime: 10000,
+  maxResponseTime: 50000,
+  runParallel: true,
+  request: {
+    url: 'https://wisereco.onrender.com/notes/updateNote',
+    method: 'PATCH',
+    body: JSON.stringify({ 
+      title:'This is test updated title',
+      tagline:'This is test updated tagline',
+      text:'This is test updated text',
+      isPinned: true
+    }),
+    skipSSL: false,
+    followRedirects: true,
+    assertions: [
+      AssertionBuilder.statusCode().equals(200),
+      AssertionBuilder.jsonBody().isNotNull()
+    ]
+  }
+})

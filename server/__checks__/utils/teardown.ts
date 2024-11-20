@@ -9,8 +9,8 @@ const getNoteIdAndDeleteNote = async()=>{
     
     // setup the correct url and its parameters
     const host = 'https://wisereco.onrender.com'
-    const path = `/notes/${_id}`
+    const path = '/notes/deleteNote'
     const url = host + path;
-    const notes = await axios.delete(url);
+    const notes = await axios.delete(url,{ data: { id : _id }});
 }
 await getNoteIdAndDeleteNote();
