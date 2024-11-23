@@ -12,7 +12,7 @@ const alertChannels = alertUsers.map((alertUser)=>(
 ))
 
 const notesAPIGroup = new CheckGroup('Notes-APIs', {
-  name: 'Notes-APIs-Group'
+  name: 'Notes-APIs-Checks'
 })
 // check for get request of notes fetching
 new ApiCheck('notes-api-check-1', {
